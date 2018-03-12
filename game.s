@@ -30,11 +30,34 @@ main:
 
     ldr r5, addrOfRand
     ldr r6, [r5]
+    mov r6, #3
+    str r6, [r5]
+
+    @ ldr r7, addrOfGuess
+    @ ldr r8, [r7]
+
+WHILEnot:
     ldr r0, addrOfPrompt
     push {lr}
     bl printf
     pop {lr}
 
+    ldr r0, addrOfFormatStr
+    ldr r1, addrOfGuess
+    bl scanf
+    ldr r1, addrOfGuess
+    ldr r2, [r1]
+
+    cmp r2, r6
+    bne WHILEnot
+    b end
+
+ldr r0, addrOfYes
+push {lr}
+bl printf
+pop {lr}
+
+    @ b end
 
 
 end:
